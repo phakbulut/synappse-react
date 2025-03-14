@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/synappse-react/static/css/main.7086c2ed.css",
+    "main.js": "/synappse-react/static/js/main.b46e2e26.js",
+    "static/js/488.4166d047.chunk.js": "/synappse-react/static/js/488.4166d047.chunk.js",
+    "index.html": "/synappse-react/index.html",
+    "main.7086c2ed.css.map": "/synappse-react/static/css/main.7086c2ed.css.map",
+    "main.b46e2e26.js.map": "/synappse-react/static/js/main.b46e2e26.js.map",
+    "488.4166d047.chunk.js.map": "/synappse-react/static/js/488.4166d047.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7086c2ed.css",
+    "static/js/main.b46e2e26.js"
+  ]
+}
