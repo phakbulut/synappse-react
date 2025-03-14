@@ -1,0 +1,11 @@
+:root{
+    --orange:#D65A31;
+    --dark:#151920;
+    --dark2:#262A31;
+    --grey:#959595;
+    --white:#FFFFFF;
+}
+label,p{
+    color:#FFFFFF;
+}
+
