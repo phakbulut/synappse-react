@@ -1,11 +1,12 @@
 :root{
     --orange:#D65A31;
+    --orangedark:#b33f18;
     --dark:#151920;
     --dark2:#262A31;
     --grey:#959595;
     --white:#FFFFFF;
 }
-label,p{
+label,p,input{
     color:#FFFFFF;
 }
 

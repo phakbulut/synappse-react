@@ -17,10 +17,10 @@ body,
     max-height: 95vh;
     overflow-y: auto;
     min-width: 300px;
-    /* margin: 0 auto; */
     margin-top: 30px;
-overflow-y: hidden;
+    overflow-y: hidden;
 }
+
 .d-flex.justify-content-center.vh-100.align-items-center {
     padding-top: 20px; /* Sayfanın üst kısmından boşluk */
 }
@@ -29,6 +29,12 @@ overflow-y: hidden;
     width: 10%;
     height: auto;
     max-width: 150px;
+}
+.AppLogo:hover{
+    outline: none;
+    border: 1px solid var(--orange);
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
 @media (max-width: 576px) {
@@ -44,34 +50,125 @@ overflow-y: hidden;
     overflow-y: hidden;
 }
 
-input[type="email"],
-input[type="password"] {
+/* Keep original styles for backward compatibility */
+.input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    text-align: left;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey);
+    z-index: 1;
+    font-size: 20px;
+    max-width: fit-content;
+}
+
+.register-input-group {
+    position: relative;
+    width: 100%;
+}
+
+.register-input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.register-input {
     background-color: var(--dark);
     border-radius: 10px;
-    padding: 12px 12px 12px 45px; /* Sol padding arttırıldı */
+    padding: 12px 12px 12px 45px !important; /* Left padding increased for icon */
     margin: 10px 0;
     width: 100%;
     border: 1px solid var(--dark);
 }
 
+input[type="email"],
+input[type="password"] {
+    background-color: var(--dark);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid var(--dark);
+}
+input[type="email"]:focus,
+input[type="password"]:focus{
+    outline: none;
+    border: 1px solid var(--orange);
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+    transition: all 0.3s ease;
+
+}
+
+.register-custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.register-custom-checkbox input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.register-checkmark {
+    height: 20px;
+    width: 20px;
+    background-color: var(--dark);
+    border: 2px solid var(--white);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+}
+
+.register-custom-checkbox input[type="checkbox"]:checked ~ .register-checkmark {
+    background-color: var(--orange);
+    border-color: var(--orange);
+    border: 1px solid var(--orange);
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+    transition: all 0.3s ease;
+
+}
+
+.register-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.register-custom-checkbox input[type="checkbox"]:checked ~ .register-checkmark:after {
+    display: block;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Original checkbox styling (maintained for backward compatibility) */
 input[type="checkbox"] {
     background-color: var(--dark);
     border-radius: 10px;
     margin: 0;
-}
-
-.rememberMe {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5px;
-}
-
-@media (max-width: 576px) {
-    .rememberMe {
-        font-size: 14px;
-        /* Gerekirse yazı boyutunu küçült */
-    }
 }
 
 input::placeholder {
@@ -86,8 +183,17 @@ form {
     color: var(--white) !important;
     background-color: var(--orange) !important;
     border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
+}
+.loginButton:hover{
+    background-color: var(--orangedark) !important;
+    border: 1px solid var(--white);
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+
+}
+
+.loginButtondiv{
+    margin: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
 }
 
 a {
@@ -97,12 +203,28 @@ a {
 hr {
     font-size: 10px;
     border-top: 5px solid var(--orange) !important;
-  
 }
+
 span {
     font-size: 10px;
     color: var(--white);
 }
+
+.rememberMe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 5px;
+}
+
+@media (max-width: 576px) {
+    .rememberMe {
+        font-size: 14px;
+        /* Gerekirse yazı boyutunu küçült */
+    }
+}
+
 .social-btn{
     color: var(--white);
     background-color: transparent;
@@ -115,34 +237,25 @@ span {
     align-items: center;
     justify-content: center;
     padding: 0;
-
 }
+
 .social-btn svg {
     font-size: 50px; /* icon boyutu */
     width: 50px;
 }
+
 .social-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--orange) ;
     color: var(--orange) ;
 }
+
 .social-btn .fa-icon {
-    font-size: 100px ;
-    
-}
-.input-group {
-    position: relative;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
+    font-size: 100px;
 }
 
-.input-icon {
-    position: absolute;
-    left: 15px; /* Icon'un sol kenarından uzaklığı */
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--grey);
-    z-index: 1;
-    font-size: 20px; /* Icon boyutu */
+.accepttc{
+    display: flex;
+    justify-content: space-evenly
+
 }
