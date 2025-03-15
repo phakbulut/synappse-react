@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/synappse-react/static/css/main.7086c2ed.css",
-    "main.js": "/synappse-react/static/js/main.b46e2e26.js",
+    "main.css": "/synappse-react/static/css/main.77f9c216.css",
+    "main.js": "/synappse-react/static/js/main.ae092bd6.js",
+    "static/js/569.2a8e3495.chunk.js": "/synappse-react/static/js/569.2a8e3495.chunk.js",
+    "static/js/178.ff1f4d30.chunk.js": "/synappse-react/static/js/178.ff1f4d30.chunk.js",
+    "static/js/175.0de331e4.chunk.js": "/synappse-react/static/js/175.0de331e4.chunk.js",
     "static/js/488.4166d047.chunk.js": "/synappse-react/static/js/488.4166d047.chunk.js",
+    "static/js/179.5e23c76b.chunk.js": "/synappse-react/static/js/179.5e23c76b.chunk.js",
     "index.html": "/synappse-react/index.html",
-    "main.7086c2ed.css.map": "/synappse-react/static/css/main.7086c2ed.css.map",
-    "main.b46e2e26.js.map": "/synappse-react/static/js/main.b46e2e26.js.map",
-    "488.4166d047.chunk.js.map": "/synappse-react/static/js/488.4166d047.chunk.js.map"
+    "main.77f9c216.css.map": "/synappse-react/static/css/main.77f9c216.css.map",
+    "main.ae092bd6.js.map": "/synappse-react/static/js/main.ae092bd6.js.map",
+    "569.2a8e3495.chunk.js.map": "/synappse-react/static/js/569.2a8e3495.chunk.js.map",
+    "178.ff1f4d30.chunk.js.map": "/synappse-react/static/js/178.ff1f4d30.chunk.js.map",
+    "175.0de331e4.chunk.js.map": "/synappse-react/static/js/175.0de331e4.chunk.js.map",
+    "488.4166d047.chunk.js.map": "/synappse-react/static/js/488.4166d047.chunk.js.map",
+    "179.5e23c76b.chunk.js.map": "/synappse-react/static/js/179.5e23c76b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7086c2ed.css",
-    "static/js/main.b46e2e26.js"
+    "static/css/main.77f9c216.css",
+    "static/js/main.ae092bd6.js"
   ]
 }
