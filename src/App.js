@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import Login from "./components/Login";
-import Main from "./components/Main"; // Ana sayfa bileşeni
+import Login from "./pages/Auth/Login";
+import Main from "./pages/Main"; // Ana sayfa bileşeni
 
 function App() {
   return (

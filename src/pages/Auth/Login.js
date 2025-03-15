@@ -2,14 +2,14 @@ import React, { useState, lazy, Suspense } from "react";
 import { Container, Form } from "reactstrap";
 import { useNavigate } from "react-router-dom"; // Yönlendirme için
 
-import "./../asset/css/main.css";
-import "./../asset/css/login.css";
+import "./../../asset/css/main.css";
+import "./../../asset/css/login.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-const TypeMailModal = lazy(() => import('./TypeMailModal'));
-const ForgotPasswordModal = lazy(() => import('./ForgotPasswordModal'));
-const ChangePasswordModal = lazy(() => import('./ChangePasswordModal'));
+const TypeMailModal = lazy(() => import('../../components/auth/TypeMailModal'));
+const ForgotPasswordModal = lazy(() => import('../../components/auth/ForgotPasswordModal'));
+const ChangePasswordModal = lazy(() => import('../../components/auth/ChangePasswordModal'));
 
 function Login() {
   const [forgotModalOpen, setForgotModalOpen] = useState(false);
