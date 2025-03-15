@@ -26,16 +26,12 @@ body,
 }
 
 .AppLogo {
+    
     width: 10%;
     height: auto;
-    max-width: 150px;
+    max-width: 100%;
 }
-.AppLogo:hover{
-    outline: none;
-    border: 1px solid var(--orange);
-    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
-    transition: all 0.3s ease;
-}
+
 
 @media (max-width: 576px) {
     .app-logo {
@@ -121,7 +117,10 @@ input[type="password"]:focus{
     align-items: center;
     cursor: pointer;
 }
-
+.register-custom-checkbox span{
+    font-size: 16px;
+    text-align: left;
+}
 .register-custom-checkbox input[type="checkbox"] {
     opacity: 0;
     position: absolute;
@@ -188,7 +187,7 @@ form {
     background-color: var(--orangedark) !important;
     border: 1px solid var(--white);
     box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
-
+    transition: all 0.3s ease;
 }
 
 .loginButtondiv{
@@ -258,4 +257,58 @@ span {
     display: flex;
     justify-content: space-evenly
 
+}
+.resetPasswordModal{
+    margin-top: 100px;
+}
+.modal {
+
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-dialog {
+    
+    max-width: 80vh !important;
+    margin: 1.75rem auto;
+   
+}
+
+.modal-content {
+    background-color: var(--dark2)!important;
+    color: var(--white)!important;
+    border-radius: 10px;
+    border: 1px solid var(--dark);
+    box-shadow: 0 0 5px var(--orange-light);
+    transition: all 0.3s ease;
+}
+
+.modal-header {
+    color: var(--white)!important;
+    border-bottom: 1px solid var(--dark) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--dark) !important;
+}
+.modal button{
+    background-color: var(--orange);
+    color: var(--white);
+    border: 1px solid var(--orange);
+}   
+.modal .fa-lock{
+    padding-left: 15px;
+    color: var(--orange)!important;
+}
+.modal .btn-close{
+    color: var(--white)!important;
+    background-color: var(--orange)!important;
+    border: 1px solid var(--orange)!important;
+}
+.forgotPassword:hover{
+    cursor: pointer;
+    color: var(--orange) ;
+}
+.modal-body .fa-icon{
+    margin-bottom: 5px !important;
 }

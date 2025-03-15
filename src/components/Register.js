@@ -4,7 +4,7 @@ import "./../asset/css/main.css";
 import "./../asset/css/login.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faEyeSlash, faLock ,faUser} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faEyeSlash ,faUser} from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
   return (

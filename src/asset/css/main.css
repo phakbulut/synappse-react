@@ -1,5 +1,6 @@
 :root{
     --orange:#D65A31;
+    --orange-light:#d65a31b2;
     --orangedark:#b33f18;
     --dark:#151920;
     --dark2:#262A31;
@@ -10,3 +11,34 @@ label,p,input{
     color:#FFFFFF;
 }
 
+.loading {
+    opacity: 0.5; /* Ekranı karart */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.5)); /* Kenarlara doğru kararma efekti */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Diğer içeriklerin üstünde görünmesi için */
+    border-color: var(--orange) !important;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid var(--orange) !important; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 500ms linear infinite; /* Döngü animasyonu */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

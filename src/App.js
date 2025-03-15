@@ -1,12 +1,14 @@
 import React from "react";
-import Register from "./components/Register";
+import { Routes, Route } from 'react-router-dom';
 import Login from "./components/Login";
+import Main from "./components/Main"; // Ana sayfa bileşeni
 
 function App() {
   return (
-    
-      <Register/>
-   
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/main" element={<Main />} />
+    </Routes>
   );
 }
 
