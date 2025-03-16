@@ -3,8 +3,10 @@
 --orange-light: #FF8A65;  
 --orangedark: #D84315;   
 --orangetransparent: rgba(255, 138, 101, 0.5);
+--darkdark: #050608; 
 --dark: #1A202C;         
---dark2: #2D3748;         
+--dark2: #2D3748; 
+--dark2-transparent: rgba(45, 55, 72, 0.7) ;        
 --grey: #A0AEC0;          
 --white: #FFFFFF;
     --default-z-index: 4 !important;
@@ -313,7 +315,7 @@ label,p,input{
 }
 .left-menu-servers-title{
     position: relative;
-    background-color: var(--orangedark) !important;
+    background-color: var(--dark) !important;
     height: 5vh;
     width: 100%;
     margin-top: 0px;
@@ -324,6 +326,10 @@ label,p,input{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--dark2-transparent); /* Dark2 renginin şeffaf versiyonu */
+    backdrop-filter: blur(10px); /* Cam levha efekti */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Gölge ekleyerek derinlik katma */
+
 }
 .left-menu-servers-title-icons{
     display: flex;
@@ -332,7 +338,14 @@ label,p,input{
     flex-direction: row;
     gap: 10px;
     font-size: 20px;
-    color: var(--grey);
+    color: var(--white);
+}
+.left-menu-servers-title-icons svg:hover{
+    cursor: pointer;
+color: var(--grey);
+}
+.server-name{
+    color: var(--white);
 }
 .left-menu-servers-content{
     display: flex;
@@ -343,16 +356,7 @@ label,p,input{
     border-radius: 10px;
     margin-top: 10px !important;
 }
-.left-menu-servers-content-channelgroup{
-    z-index: 3 !important;
-    display: flex;
-    position: relative;
-    background-color: var(--orangetransparent) !important;
-    height: 10%;
-    width: 100%;
-    padding: 0 !important;
-    border-radius: 10px;
-}
+
 .channel-group-name {
     flex: 1;
     min-width: 0; /* Taşmayı önlemek için önemli */
@@ -438,4 +442,57 @@ color: var(--white) !important;
     height: 100%;
     display: flex;
     align-items: center;
+}
+.channel-group-header{
+    width: 100%;
+    flex-direction: row;
+}
+
+
+.left-menu-servers-content-channelgroup {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+.left-menu-servers-content-channelgroup:hover {
+    border-radius: 10px;
+
+    background-color: var(--dark2-transparent); /* Dark2 renginin şeffaf versiyonu */
+    backdrop-filter: blur(10px); /* Cam levha efekti */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Gölge ekleyerek derinlik katma */
+
+}
+
+.left-menu-servers-content-channelgroup.expanded {
+    height: auto;
+    border-radius: 10px;
+    background-color: var(--dark2-transparent); /* Dark2 renginin şeffaf versiyonu */
+    backdrop-filter: blur(10px); /* Cam levha efekti */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Gölge ekleyerek derinlik katma */
+}
+
+.channel-group-header {
+    height: 40px;
+    cursor: pointer;
+}
+
+.channel-item {
+    padding-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.channel-item:hover {
+    background-color: var(--dark2);
+    border-radius: 5px;
+}
+
+.channel-expand {
+    color: var(--white);
+    padding: 5px;
+}
+
+.channel-expand:hover {
+    background-color: var(--dark2);
+    border-radius: 50%;
 }
