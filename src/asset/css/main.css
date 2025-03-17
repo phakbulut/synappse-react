@@ -140,18 +140,19 @@ select:focus,input[type="text"]:focus::placeholder{
     z-index: 4;
 }
 .left-bar-container {
+    z-index: 3 !important;
     position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
     height: 100vh;
     width: 10vh;
-    z-index: 4 !important;
+    z-index: 9998 !important;
     background-color: var(--dark) !important;
     display: flex;
     flex-direction: column; /* Dikey düzenleme */ 
     border-right: 1px solid var(--orange);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .left-bar-top {
@@ -841,4 +842,119 @@ color: var(--white) !important;
 
 .hidden-input {
     display: none;
+}
+
+/* Select hover efekti için */
+select:hover {
+    background-color: var(--dark2) !important;
+    border: 1px solid var(--orange) !important;
+    cursor: pointer;
+}
+
+/* Select option hover efekti için */
+select option:hover {
+    background-color: var(--dark2) !important;
+    color: var(--orange) !important;
+    cursor: pointer;
+}
+
+/* Butonlar için hover efekti */
+.modal-footer button {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--orange) !important;
+}
+
+.modal-footer button:hover {
+    background-color: var(--orangedark) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--orangedark) !important;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF7043'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 30px !important;
+}
+
+select:hover {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D84315'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+}
+
+
+
+/* User avatar container */
+.user-avatar-container {
+    position: relative;
+    display: inline-block;
+   
+}
+
+.user-info-popup {
+    backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+  background-color: var(--dark2-transparent);
+  transition: all 0.3s ease;
+}
+
+/* Hover durumunda görünür hale getir */
+.user-avatar:hover + .user-info-popup,
+.user-info-popup:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+.user-avatar-container {
+    position: relative;
+    display: inline-block;
+    z-index: 9999; /* High z-index for the container */
+}
+/* User info içeriği */
+.user-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-info-name {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.user-info-tag {
+    color: var(--grey);
+    font-size: 14px;
+}
+
+.user-info-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--grey);
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--online);
+}
+
+.status-dot.offline {
+    background-color: var(--offline);
 }

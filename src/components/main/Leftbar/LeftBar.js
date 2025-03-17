@@ -6,7 +6,7 @@ import MiddleFriends from './MiddleFriends';
 
 const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedServerId, handleFriendsOpen, handleCloseFriends, friendsOpen }) => {
   const [activeButton, setactiveButton] = useState('friends');
-  
+
   const handleActiveButton = (buttontype) => {
     setactiveButton(buttontype);
     if (buttontype === 'friends') {
@@ -29,14 +29,14 @@ const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedS
     </div>
 
     {/* Orta Kısım */}
-    {activeButton === 'servers' ? 
-      <MiddleServers 
-        handleServersOpen={handleServersOpen} 
-        serversOpen={serversOpen} 
-        selectedServerId={selectedServerId} 
-      /> 
+    {activeButton === 'servers' ?
+      <MiddleServers
+        handleServersOpen={handleServersOpen}
+        serversOpen={serversOpen}
+        selectedServerId={selectedServerId}
+      />
       :
-      <MiddleFriends 
+      <MiddleFriends
         handleFriendsOpen={handleFriendsOpen}
         handleCloseFriends={handleCloseFriends}
         friendsOpen={friendsOpen}
@@ -48,7 +48,7 @@ const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedS
     <div className='left-bar-bottom'>
       <div className='left-bar-item-bottom'>
         {activeButton === 'servers' ? (
-          <div className='change-button' onClick={() => handleActiveButton('friends') } title="Arkadaşlar ve Serverlar arasında geçiş yap">
+          <div className='change-button' onClick={() => handleActiveButton('friends')} title="Arkadaşlar ve Serverlar arasında geçiş yap">
             <FontAwesomeIcon icon={faArrowsDownToPeople} />
           </div>
         ) : (
