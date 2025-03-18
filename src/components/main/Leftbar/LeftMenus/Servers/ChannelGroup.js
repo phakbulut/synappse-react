@@ -4,7 +4,7 @@ import { faChevronDown, faChevronUp, faPlus, faVolumeHigh, faMessage, faList, fa
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Channel from './Channel';
 
-const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup }) => {
+const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup, handleChannelClick }) => {
     const [channels, setChannels] = useState([
         { id: 1, name: 'Ses Kanalı', type: 'voice' },
         { id: 2, name: 'Text Kanalı', type: 'text' },
@@ -55,6 +55,19 @@ const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup }) =>
         }
     };
     
+    // Kanal tıklama olayını güçlendirilmiş event handling ile güncelleyelim
+    const handleChannelItemClick = (e, channelId, channelType) => {
+        // Olay yayılımını ve varsayılan davranışı engelle
+        e.stopPropagation();
+        e.preventDefault();
+        
+        // Uygun handleChannelClick çağrısını yap
+        handleChannelClick(channelId, channelType);
+        
+        // Olayı tamamen durdur
+        return false;
+    };
+    
     return (
         <div className={`left-menu-servers-content-channelgroup ${isExpanded ? 'expanded' : ''}`}>
             <div className='channel-group-header d-flex justify-content-between align-items-center w-100 px-2'>
@@ -78,25 +91,25 @@ const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup }) =>
                                 <div className="channel-type-selector d-flex gap-1">
                                     <div 
                                         className={`channel-type-icon ${newChannelType === 'text' ? 'active' : ''}`} 
-                                        onClick={() => setNewChannelType('text')}
+                                        onClick={(e) => { e.stopPropagation(); setNewChannelType('text'); }}
                                     >
                                         <FontAwesomeIcon icon={faMessage} />
                                     </div>
                                     <div 
                                         className={`channel-type-icon ${newChannelType === 'voice' ? 'active' : ''}`} 
-                                        onClick={() => setNewChannelType('voice')}
+                                        onClick={(e) => { e.stopPropagation(); setNewChannelType('voice'); }}
                                     >
                                         <FontAwesomeIcon icon={faVolumeHigh} />
                                     </div>
                                     <div 
                                         className={`channel-type-icon ${newChannelType === 'github' ? 'active' : ''}`} 
-                                        onClick={() => setNewChannelType('github')}
+                                        onClick={(e) => { e.stopPropagation(); setNewChannelType('github'); }}
                                     >
                                         <FontAwesomeIcon icon={faGithub} />
                                     </div>
                                     <div 
                                         className={`channel-type-icon ${newChannelType === 'todo' ? 'active' : ''}`} 
-                                        onClick={() => setNewChannelType('todo')}
+                                        onClick={(e) => { e.stopPropagation(); setNewChannelType('todo'); }}
                                     >
                                         <FontAwesomeIcon icon={faList} />
                                     </div>
@@ -106,7 +119,7 @@ const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup }) =>
                                     className="form-control form-control-sm" 
                                     placeholder="Kanal adı" 
                                     value={newChannelName}
-                                    onChange={(e) => setNewChannelName(e.target.value)}
+                                    onChange={(e) => { e.stopPropagation(); setNewChannelName(e.target.value); }}
                                 />
                             </div>
                             <div className="d-flex align-items-center gap-2 col-4 justify-content-end">
@@ -122,13 +135,18 @@ const ChannelGroup = ({ groupId, groupName, isExpanded, toggleChannelGroup }) =>
                     
                     {/* Kanallar */}
                     {channels.map(channel => (
-                        <Channel 
+                        <div 
+                            className="channel-item d-flex align-items-center py-1 px-2" 
                             key={channel.id}
-                            id={channel.id}
-                            name={channel.name}
-                            type={channel.type}
-                            icon={getIconForType(channel.type)}
-                        />
+                            onClick={(e) => handleChannelItemClick(e, channel.id, channel.type)}
+                        >
+                            <Channel 
+                                id={channel.id}
+                                name={channel.name}
+                                type={channel.type}
+                                icon={getIconForType(channel.type)}
+                            />
+                        </div>
                     ))}
                 </div>
             )}

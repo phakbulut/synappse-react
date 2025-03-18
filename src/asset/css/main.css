@@ -147,7 +147,6 @@ select:focus,input[type="text"]:focus::placeholder{
     height: 100vh;
     height: 100vh;
     width: 10vh;
-    z-index: 9998 !important;
     background-color: var(--dark) !important;
     display: flex;
     flex-direction: column; /* Dikey düzenleme */ 
@@ -346,16 +345,16 @@ select:focus,input[type="text"]:focus::placeholder{
     position: absolute;
     margin-left: 10vh !important;
     z-index: 4 !important;
-    background-color: var(--dark) !important;
-    position: fixed;
+    backdrop-filter: blur(10px);
+    background-color: var(--dark2-transparent);    position: fixed;
     left: 10px;
     top: 10px;
     bottom: 10px;
     height: 97vh !important;
     width: 35vh !important;
     border-radius: 10px;
-    box-shadow: 4px 4px 10px 1px var(--orangedark);
-   padding-left: 25px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+    padding-left: 25px !important;
    padding-right: 5px !important;
     padding: 10px ;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -734,13 +733,13 @@ color: var(--white) !important;
     box-shadow: 0 2px 5px var(--orangedark) !important;
     pointer-events: none;
 }
-.notification-icon{
+.notification-icon {
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 25px; /* Margin artırıldı */
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 10;
+    z-index: 10; /* Z-index artırıldı */
     color: var(--grey) !important;
     width: 60px;
     height: 60px;
@@ -748,6 +747,30 @@ color: var(--white) !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Arkaplan eklendi */
+    backdrop-filter: blur(5px);
+}
+
+.notification-icon:hover {
+    color: var(--orange) !important;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Z-index değerlerini düzenlemek için yeni bir sınıf */
+.channel-container {
+    z-index: 3 !important; /* Channel container z-index */
+}
+
+.servers-container {
+    z-index: 4 !important; /* Servers container z-index */
+}
+
+.users-container {
+    z-index: 4 !important; /* Users container z-index */
+}
+
+.notifications-container {
+    z-index: 5 !important; /* Notifications container z-index */
 }
 
 .add-server-avatar{
@@ -896,17 +919,16 @@ select:hover {
 }
 
 .user-info-popup {
-    backdrop-filter: blur(10px);
-  padding: 15px;
+  
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  width: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-
   background-color: var(--dark2-transparent);
   transition: all 0.3s ease;
+  min-width: 300px;
+  padding: 1rem;
 }
+
 
 /* Hover durumunda görünür hale getir */
 .user-avatar:hover + .user-info-popup,
@@ -924,9 +946,9 @@ select:hover {
 }
 /* User info içeriği */
 .user-info-content {
+    
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 .user-info-name {
@@ -952,9 +974,62 @@ select:hover {
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    display: inline-block;
     background-color: var(--online);
 }
 
 .status-dot.offline {
     background-color: var(--offline);
+}
+
+.user-info-avatar img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-info-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.user-info-footer svg {
+    color: var(--white);
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.user-info-footer form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    flex: 1;
+}
+.user-info-footer form input {
+    flex: 1;
+    padding: 5px 12px 5px 45px !important; /* Left padding increased for icon */
+    border: 1px solid var(--orange);
+    border-radius: 5px;
+    background-color: var(--dark);
+    color: var(--white);
+    position: relative;
+    padding-left: 15px !important;
+}
+.user-info-footer form svg {
+    position: absolute;
+    color: var(--grey);
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 15px !important;
+    right: 20px;
+}
+.user-info-footer form button:hover{
+    background-color: var(--orangedark);
+    border: 1px solid var(--orangedark);
+}
+.user-info-role{
+    color: var(--orange);
+    font-size: 14px;
 }

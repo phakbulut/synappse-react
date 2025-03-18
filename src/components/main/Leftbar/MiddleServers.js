@@ -9,7 +9,7 @@ const servers = [
   { id: 1, name: "Server 1", notifications: 5, online: true },
   { id: 2, name: "Server 2", notifications: 50, online: false }
 ];
-const Middle = ({ handleServersOpen, serversOpen, selectedServerId }) => {
+const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersOpen, handleCloseUsers, usersOpen }) => {
 
   const [addServerModal, setAddServerModal] = useState(false);
   const addservertoggle = () => setAddServerModal(!addServerModal);
@@ -33,7 +33,11 @@ const Middle = ({ handleServersOpen, serversOpen, selectedServerId }) => {
         <div className='left-bar-item-middle' key={server.id}>
           <div
             className={`server-avatar ${server.online ? 'online' : ''} ${selectedServerId === server.id ? 'current-server' : ''}`}
-            onClick={() => handleServersOpen(server.id)}
+            onClick={() => {
+              handleServersOpen(server.id);
+              handleUsersOpen();
+            }}
+            
           >
             <p className='notification-count'>{server.notifications}</p>
             <img

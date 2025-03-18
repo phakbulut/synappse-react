@@ -1,0 +1,150 @@
+.left-menu-servers-addpeople{
+    position: absolute;
+    margin-left: 10vh !important;
+    z-index: 5 !important;
+    backdrop-filter: blur(10px);
+    background-color: var(--dark2-transparent);   
+     position: fixed;
+    left: 10px;
+    top: 10px;
+    bottom: 10px;
+    height: 88vh !important;
+    width: 35vh !important;
+    margin-top: 8vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);  
+    padding-left: 25px !important;
+   padding-right: 5px !important;
+    padding: 10px ;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+.left-menu-servers-addpeople.closed {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;  
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.left-menu-servers-addpeople.open {
+    z-index: 5 !important;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    animation: slideRight 0.3s ease-in-out;
+    
+}
+.left-menu-servers-addpeople-title{
+    position: relative;
+    background-color: var(--dark) !important;
+    height: 5vh;
+    width: 100%;
+    margin-top: 0px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    color: var(--grey);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark2-transparent); /* Dark2 renginin şeffaf versiyonu */
+    backdrop-filter: blur(10px); /* Cam levha efekti */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Gölge ekleyerek derinlik katma */
+
+}
+
+/* Popup açık olduğunda overlay ekleyelim */
+.add-people-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam koyu arka plan */
+    backdrop-filter: blur(5px); /* Arka planı bulanıklaştır */
+    -webkit-backdrop-filter: blur(5px); /* Safari için destek */
+    z-index: 5 !important; /* Servers menüsünün üstünde, AddPeople'ın altında */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.add-people-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Açık durumda kullanıcı ekleme ikonunun rengini değiştirelim */
+.user-add-icon-active {
+    color: var(--orange) !important;
+    transition: color 0.3s ease;
+}
+
+
+.server-addpeople-users-list-item:hover{
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Gölge ekleyerek derinlik katma */
+    border-radius: 10px;
+    background-color: var(--dark2-transparent);
+    backdrop-filter: blur(10px);  
+}
+
+
+.left-menu-servers-content{
+    padding-left: 1px !important;
+    padding-right: 10px !important;
+}
+.servers-addpeople-user-name{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.servers-addpeople-user-status-online{
+    color: var(--online) !important;
+}
+
+.servers-addpeople-user-status-offline{
+    color: var(--offline) !important;
+}
+
+.servers-addpeople-search-container {
+    background-color: var(--dark2-transparent) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    position: relative;
+}
+
+.servers-addpeople-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.servers-addpeople-input-group-text {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.servers-addpeople-input-group input {
+    padding-left: 35px;
+    background-color: var(--dark2-transparent) !important;
+    border: none;
+    color: var(--grey);
+}
+.servers-addpeople-action-buttons{
+    width: 90%;
+    bottom: 2vh;
+    border-radius: 10px;
+    background-color: var(--dark2-transparent) !important;
+    position: sticky;
+
+}
+
+

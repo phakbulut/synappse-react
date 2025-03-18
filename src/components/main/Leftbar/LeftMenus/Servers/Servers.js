@@ -3,12 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faSitemap, faUserPlus, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ChannelGroup from './ChannelGroup';
 
-const Servers = ({ className, isOpen, handleCloseServers }) => {
+const Servers = ({ className, isOpen, selectedServerId, handleCloseServers, handleAddPeopleOpen, addPeopleOpen, handleChannelClick }) => {
     // Grup ekleme formu için state
     const [showAddGroupForm, setShowAddGroupForm] = useState(false);
     const [newGroupName, setNewGroupName] = useState('');
     
-    // Örnek kanal grupları
     const [channelGroups, setChannelGroups] = useState([
         { id: 'netEkibi1', name: '.Net Ekibi 1' },
         { id: 'netEkibi2', name: '.Net Ekibi 2' },
@@ -17,7 +16,6 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
         { id: 'netEkibi5', name: 'UI/UX Ekibi' }
     ]);
 
-    // Track expanded state for each channel group separately
     const [expandedGroups, setExpandedGroups] = useState({
         netEkibi1: false,
         netEkibi2: false,
@@ -29,7 +27,6 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
     // Ref for the servers menu container
     const serversRef = useRef(null);
 
-    // Toggle specific channel group by its id
     const toggleChannelGroup = (groupId) => {
         setExpandedGroups(prevState => ({
             ...prevState,
@@ -37,17 +34,16 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
         }));
     };
     
-    // Grup ekleme formunu göster/gizle
     const toggleAddGroupForm = () => {
         setShowAddGroupForm(!showAddGroupForm);
-        setNewGroupName('');
+        setNewGroupName('selected');
     };
     
     // Yeni grup ekle
     const addGroup = () => {
         if (newGroupName.trim() === '') return;
         
-        const groupId = `group_${Date.now()}`; // Basit bir unique ID
+        const groupId = `group_${Date.now()}`; 
         const newGroup = {
             id: groupId,
             name: newGroupName
@@ -55,7 +51,6 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
         
         setChannelGroups([...channelGroups, newGroup]);
         
-        // Yeni grup için expanded state ekle
         setExpandedGroups(prevState => ({
             ...prevState,
             [groupId]: false
@@ -65,19 +60,15 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
         setNewGroupName('');
     };
 
-    // Handle click outside
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // Eğer menü açıksa ve tıklanan yer menünün dışındaysa kapat
             if (isOpen && serversRef.current && !serversRef.current.contains(event.target)) {
                 handleCloseServers();
             }
         };
 
-        // Event listener'ı ekle
         document.addEventListener('mousedown', handleClickOutside);
         
-        // Cleanup function
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -104,7 +95,9 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
                     <FontAwesomeIcon 
                         icon={faUserPlus} 
                         title="Kullanıcı Ekle" 
-                        className="server-icon"
+                        className="user-add-icon"
+                        onClick={handleAddPeopleOpen}
+
                     />
                 </div>
             </div>
@@ -140,6 +133,7 @@ const Servers = ({ className, isOpen, handleCloseServers }) => {
                         groupName={group.name}
                         isExpanded={expandedGroups[group.id]}
                         toggleChannelGroup={toggleChannelGroup}
+                        handleChannelClick={handleChannelClick}
                     />
                 ))}
             </div>

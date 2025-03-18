@@ -4,7 +4,7 @@ import { faArrowsDownToPeople, faPeopleArrows } from '@fortawesome/free-solid-sv
 import MiddleServers from './MiddleServers';
 import MiddleFriends from './MiddleFriends';
 
-const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedServerId, handleFriendsOpen, handleCloseFriends, friendsOpen }) => {
+const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedServerId, handleFriendsOpen, handleCloseFriends, friendsOpen, handleUsersOpen, handleCloseUsers, usersOpen }) => {
   const [activeButton, setactiveButton] = useState('friends');
 
   const handleActiveButton = (buttontype) => {
@@ -34,6 +34,9 @@ const LeftBar = ({ handleServersOpen, handleCloseServers, serversOpen, selectedS
         handleServersOpen={handleServersOpen}
         serversOpen={serversOpen}
         selectedServerId={selectedServerId}
+        handleUsersOpen={handleUsersOpen}
+        handleCloseUsers={handleCloseUsers}
+        usersOpen={usersOpen}
       />
       :
       <MiddleFriends
