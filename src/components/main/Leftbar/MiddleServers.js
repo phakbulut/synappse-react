@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-
+import * as actions from '../../../redux/actions/MainActions'; // Dosya yolunu projene göre ayarla
 
 const servers = [
   { id: 1, name: "Server 1", notifications: 5, online: true },
   { id: 2, name: "Server 2", notifications: 50, online: false }
 ];
-const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersOpen, handleCloseUsers, usersOpen }) => {
 
+const MiddleServers = () => {
+  const dispatch = useDispatch();
+  const { serversOpen, selectedServerId, usersOpen } = useSelector((state) => state);
+
+  // Yerel state’ler (Redux’a taşınmayacak, yalnızca UI için)
   const [addServerModal, setAddServerModal] = useState(false);
-  const addservertoggle = () => setAddServerModal(!addServerModal);
   const [selectedImage, setSelectedImage] = useState(process.env.PUBLIC_URL + '/asset/images/server.png');
+
+  const addservertoggle = () => setAddServerModal(!addServerModal);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -27,17 +33,15 @@ const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersO
   };
 
   return (
-
     <div className='left-bar-middle'>
       {servers.map(server => (
         <div className='left-bar-item-middle' key={server.id}>
           <div
             className={`server-avatar ${server.online ? 'online' : ''} ${selectedServerId === server.id ? 'current-server' : ''}`}
             onClick={() => {
-              handleServersOpen(server.id);
-              handleUsersOpen();
+              dispatch(actions.openServers(server.id));
+              dispatch(actions.openUsers());
             }}
-            
           >
             <p className='notification-count'>{server.notifications}</p>
             <img
@@ -48,14 +52,14 @@ const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersO
           </div>
         </div>
       ))}
-      {/* yeni server ekleme butonu */}
-      <div className='left-bar-item-middle '>
+      {/* Yeni sunucu ekleme butonu */}
+      <div className='left-bar-item-middle'>
         <div className='add-server-avatar'>
           <FontAwesomeIcon icon={faSquarePlus} onClick={addservertoggle} />
         </div>
       </div>
-      <Modal isOpen={addServerModal} toggle={addservertoggle} >
-        <ModalHeader className='add-server-modal-header' toggle={addservertoggle}>Create Server</ModalHeader>
+      <Modal isOpen={addServerModal} toggle={addservertoggle}>
+        <ModalHeader className='add-server-modal-header' toggle={addservertoggle}>Sunucu Oluştur</ModalHeader>
         <ModalBody className='add-server-modal-body d-flex flex-column justify-content-center align-items-center'>
           <Form>
             <FormGroup className='d-flex flex-column justify-content-center align-items-center'>
@@ -65,35 +69,34 @@ const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersO
                   <span>Resim Seç</span>
                 </div>
               </Label>
-              <input 
-                type="file" 
-                id="add-server-avatar" 
-                className="hidden-input" 
+              <input
+                type="file"
+                id="add-server-avatar"
+                className="hidden-input"
                 onChange={handleImageChange}
                 accept="image/*"
               />
             </FormGroup>
             <FormGroup>
-              <Label for="serverName">Server Name</Label>
-              <Input type="text" id="serverName" placeholder="Enter server name" />
+              <Label for="serverName">Sunucu Adı</Label>
+              <Input type="text" id="serverName" placeholder="Sunucu adını gir" />
             </FormGroup>
             <FormGroup className='d-flex flex-column justify-content-center align-items-center'>
-              <Label for="serverName">Server Type</Label>
-              <select name="serverName" id="serverName">
-                <option value="1">Games</option>
-                <option value="2">Development</option>
-                <option value="3">Other</option>
+              <Label for="serverType">Sunucu Türü</Label>
+              <select name="serverType" id="serverType">
+                <option value="1">Oyun</option>
+                <option value="2">Geliştirme</option>
+                <option value="3">Diğer</option>
               </select>
             </FormGroup>
-            
           </Form>
         </ModalBody>
         <ModalFooter>
           <Button color="" onClick={addservertoggle}>
-          Create Server
+            Sunucu Oluştur
           </Button>{' '}
           <Button color="" onClick={addservertoggle}>
-            Cancel
+            İptal
           </Button>
         </ModalFooter>
       </Modal>
@@ -101,4 +104,4 @@ const Middle = ({ handleServersOpen, serversOpen, selectedServerId, handleUsersO
   );
 };
 
-export default Middle;
+export default MiddleServers;

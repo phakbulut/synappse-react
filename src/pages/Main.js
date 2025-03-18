@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './../asset/css/main.css';
 import LeftBar from '../components/main/Leftbar/LeftBar';
 import Servers from '../components/main/Leftbar/LeftMenus/Servers/Servers';
@@ -12,156 +13,95 @@ import TextChannel from '../components/main/channels/TextChannel';
 import VoiceChannel from '../components/main/channels/VoiceChannel';
 import GithubChannel from '../components/main/channels/GithubChannel';
 import TodoChannel from '../components/main/channels/TodoChannel';
-
-// Kanal işleyici fonksiyonlarını içe aktar
-import {
-  closeAllChannels,
-  handleChannelClick as channelClickHandler,
-  handleCloseTextChannel as closeTextChannel,
-  handleCloseVoiceChannel as closeVoiceChannel,
-  handleCloseGithubChannel as closeGithubChannel,
-  handleCloseTodoChannel as closeTodoChannel,
-  toggleServersVisibility as toggleServers
-} from '../handlers/ChannelHandlers';
+import * as actions from '../redux/actions/MainActions';
 
 const Main = () => {
-  const [serversOpen, setServersOpen] = useState(false);
-  const [selectedServerId, setSelectedServerId] = useState(null);
-  const [friendsOpen, setFriendsOpen] = useState(false);
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const [addPeopleOpen, setAddPeopleOpen] = useState(false);
-  const [usersOpen, setUsersOpen] = useState(false);
-  
-  // Kanal durum state'leri
-  const [textChannelOpen, setTextChannelOpen] = useState(false);
-  const [voiceChannelOpen, setVoiceChannelOpen] = useState(false);
-  const [githubChannelOpen, setGithubChannelOpen] = useState(false);
-  const [todoChannelOpen, setTodoChannelOpen] = useState(false);
-  
-  // Aktif kanal state'i
-  const [activeChannelType, setActiveChannelType] = useState(null);
-  const [activeChannelId, setActiveChannelId] = useState(null);
+  const dispatch = useDispatch();
 
-  // channelSetters'ı useMemo ile optimize et
-  const channelSetters = useMemo(() => ({
-    setTextChannelOpen,
-    setVoiceChannelOpen,
-    setGithubChannelOpen,
-    setTodoChannelOpen,
-    setActiveChannelType,
-    setActiveChannelId
-  }), [
-    setTextChannelOpen,
-    setVoiceChannelOpen,
-    setGithubChannelOpen,
-    setTodoChannelOpen,
-    setActiveChannelType,
-    setActiveChannelId
-  ]);
-  
-  // useCallback ile fonksiyonları memoize et
-  const handleCloseTextChannel = useCallback((e) => closeTextChannel(e, channelSetters), [channelSetters]);
-  const handleCloseVoiceChannel = useCallback((e) => closeVoiceChannel(e, channelSetters), [channelSetters]);
-  const handleCloseGithubChannel = useCallback((e) => closeGithubChannel(e, channelSetters), [channelSetters]);
-  const handleCloseTodoChannel = useCallback((e) => closeTodoChannel(e, channelSetters), [channelSetters]);
-  const handleChannelClick = useCallback((channelId, channelType) => 
-    channelClickHandler(channelId, channelType, channelSetters), [channelSetters]);
-  const toggleServersVisibility = useCallback((e) => toggleServers(e, setServersOpen), []);
+  // Redux state'inden durumları al
+  const {
+    serversOpen,
+    selectedServerId,
+    friendsOpen,
+    notificationsOpen,
+    addPeopleOpen,
+    usersOpen,
+    textChannelOpen,
+    voiceChannelOpen,
+    githubChannelOpen,
+    todoChannelOpen,
+    activeChannelId
+  } = useSelector((state) => state);
 
-  // Global erişim için
+  // Handler fonksiyonlarını Redux action'larıyla güncelle
+  const handleServersOpen = useCallback((serverId) => {
+    dispatch(actions.openServers(serverId));
+  }, [dispatch]);
+
+  const handleCloseServers = useCallback(() => {
+    dispatch(actions.closeServers());
+  }, [dispatch]);
+
+  const handleFriendsOpen = useCallback(() => {
+    dispatch(actions.openFriends());
+  }, [dispatch]);
+
+  const handleCloseFriends = useCallback(() => {
+    dispatch(actions.closeFriends());
+  }, [dispatch]);
+
+  const handleNotificationsOpen = useCallback(() => {
+    dispatch(actions.openNotifications());
+  }, [dispatch]);
+
+  const handleCloseNotifications = useCallback(() => {
+    dispatch(actions.closeNotifications());
+  }, [dispatch]);
+
+  const handleAddPeopleOpen = useCallback(() => {
+    dispatch(actions.openAddPeople());
+  }, [dispatch]);
+
+  const handleCloseAddPeople = useCallback(() => {
+    dispatch(actions.closeAddPeople());
+  }, [dispatch]);
+
+  const handleUsersOpen = useCallback(() => {
+    dispatch(actions.openUsers());
+  }, [dispatch]);
+
+  const handleCloseUsers = useCallback(() => {
+    dispatch(actions.closeUsers());
+  }, [dispatch]);
+
+  const handleChannelClick = useCallback((channelId, channelType) => {
+    dispatch(actions.setActiveChannel(channelId, channelType));
+  }, [dispatch]);
+
+  const handleCloseTextChannel = useCallback(() => {
+    dispatch(actions.closeTextChannel());
+  }, [dispatch]);
+
+  const handleCloseVoiceChannel = useCallback(() => {
+    dispatch(actions.closeVoiceChannel());
+  }, [dispatch]);
+
+  const handleCloseGithubChannel = useCallback(() => {
+    dispatch(actions.closeGithubChannel());
+  }, [dispatch]);
+
+  const handleCloseTodoChannel = useCallback(() => {
+    dispatch(actions.closeTodoChannel());
+  }, [dispatch]);
+
+  const toggleServersVisibility = useCallback(() => {
+    dispatch(serversOpen ? actions.closeServers() : actions.openServers(selectedServerId));
+  }, [dispatch, serversOpen, selectedServerId]);
+
+  // Global erişim için (Redux ile bu gerekli olmayabilir, ama şimdilik bırakıyorum)
   window.toggleServersVisibility = toggleServersVisibility;
 
-  const handleServersOpen = (serverId) => {
-    setServersOpen(true);
-    setSelectedServerId(serverId);
-    
-    // Servers açıldığında Users panelini açalım, kanal açmayalım
-    setUsersOpen(true);
-    
-    // Diğer panelleri kapatalım
-    if (friendsOpen) {
-      setFriendsOpen(false);
-    }
-    if (notificationsOpen) {
-      setNotificationsOpen(false);
-    }
-    if (addPeopleOpen) {
-      setAddPeopleOpen(false);
-    }
-    
-    // Herhangi bir kanal açık değil
-    closeAllChannels(channelSetters);
-  };
-
-  const handleCloseServers = () => {
-    setServersOpen(false);
-    setSelectedServerId(null);
-    
-    // Servers kapanınca Users panelini de kapatalım
-    setUsersOpen(false);
-    
-    // Tüm kanalları kapatalım
-    closeAllChannels(channelSetters);
-  };
-  
-  const handleFriendsOpen = () => {
-    setFriendsOpen(prev => !prev);
-    if (serversOpen) {
-      setServersOpen(false);
-      setSelectedServerId(null);
-      setUsersOpen(false);
-    }
-    
-    // Tüm kanalları kapatalım
-    closeAllChannels(channelSetters);
-  };
-
-  const handleCloseFriends = () => {
-    setFriendsOpen(false);
-  };
-  
-  const handleNotificationsOpen = () => {
-    setNotificationsOpen(prev => !prev);
-    if (serversOpen) {
-      setServersOpen(false);
-      setSelectedServerId(null);
-      setUsersOpen(false);
-    }
-    if (friendsOpen) {
-      setFriendsOpen(false);
-    }
-    
-    // Tüm kanalları kapatalım
-    closeAllChannels(channelSetters);
-  };
-  
-  const handleCloseNotifications = () => {
-    setNotificationsOpen(false);
-  };
-  
-  const handleCloseAddPeople = () => {
-    setAddPeopleOpen(false);
-  };
-  
-  const handleAddPeopleOpen = () => {
-    setAddPeopleOpen(true);
-    if (usersOpen) {
-      setUsersOpen(false);
-    }
-  };
-  
-  const handleUsersOpen = () => {
-    setUsersOpen(true);
-    if (addPeopleOpen) {
-      setAddPeopleOpen(false);
-    }
-  };
-  
-  const handleCloseUsers = () => {
-    setUsersOpen(false);
-  };
-  
-  // Ana içeriğin görünürlüğü (herhangi bir kanal açıkken gizlenecek)
+  // Ana içeriğin görünürlüğü
   const isAnyChannelOpen = textChannelOpen || voiceChannelOpen || githubChannelOpen || todoChannelOpen;
 
   return (
@@ -250,7 +190,7 @@ const Main = () => {
           />
         </div>
         
-        {/* Karşılama ekranı - Kanal açık değilken gösterilir */}
+        {/* Karşılama ekranı */}
         {!isAnyChannelOpen && (
           <>
             <div className='logo-container'>
